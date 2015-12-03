@@ -1,0 +1,27 @@
+ ooooo ooooo ooooo ooooo ooooo (25)
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+(12)
+
+TestingBlockPlacement:
+
+
+          #
+                       ##
+        #
+                    #
+               #
+               #
+     #         #
+               #
+                  #
