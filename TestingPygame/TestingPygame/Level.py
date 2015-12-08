@@ -1,43 +1,105 @@
 ﻿import pygame
-from Environment import Stage
 from Player import Player
+from SpritelikeBox import SpriteBox
+from Collisions import CollisionCheck
+from Environment import Stage
 
 class Level(object):
-    """List of stages should be created before a correponding Level object"""
-    Name = str()
-    Bckgr = None       # some image
-    CurrentStage = Stage()
-    AwaitingStages = []
-    Width = 0
-    LevelShift = 0
-    CurrentX = 0       # amount of shift; max: (W - 1000); former X
-    EndReached = False
-    StagesList = list()
-    PlayerGroup = pygame.sprite.GroupSingle() 
+    """..."""
+   
+    def __init__(self, window, imageName = "bckg.bmp", name = "Level x"):
+        """
+        nop. 
+        """
+        # Player belongs to the entire level
+        self.PlayerGroup = pygame.sprite.GroupSingle()
 
-    def __init__(self, window, imageName = "bckg.bmp", name = "Level x", stages = list()):
-        self.PlayerGroup.add(Player())
-        self.StagesList = stages
+        # Collision check has level-wide scope
+        self.AllBlocksGroup = pygame.sprite.Group()
+        self.AllBlocksXY = list()
+
         self.Bckgr = pygame.image.load(imageName)
-        self.Width = sum(map(lambda stg: stg.StageLength, stages))
-        self.CurrentStage = self.StagesList.pop(0)
-        window.blit(self.Bckgr, (self.CurrentX, 0))
+        self.Name = name
+        self.PlayerGroup.add(Player())
+        self.Width = int()
+        self.LevelShift = int()
+        self.CurrentX = int()
+        self.EndReached = False
+                
+        for n in range(1,4):
+            s = Stage(str(n).rjust(2, "0"), self)
+            del s
 
-    def NextStage(self):
-        """Assuming that the level has an existing StagesList. """
-        if self.StagesList: 
-            newStage = self.StagesList.pop(0)
-            newStage.SetBoxesX()
-            self.AwaitingStages.append(newStage)
-        else:
-            pass    # End Level
 
     def DrawFrame(self, screen):
-        screen.blit(self.Bckgr, (X,0))
-        self.CurrentStage.BlockGroup.draw(screen)
-        for stg in self.AwaitingStages:
-            stg.BlockGroup.draw(screen)
+        screen.blit(self.Bckgr, (self.CurrentX,0))
+        self.AllBlocksGroup.draw(screen)
         self.PlayerGroup.draw(screen)
+
+        
+
+    def ShiftFrame(self): 
+
+        # Shifting all blocks on screen
+        self.PlayerGroup.sprite.Animate()
+
+        if not self.EndReached:
+
+            for block in self.AllBlocksGroup:             
+                block.rect.x -= 10                   
+                if block.rect.x + 40 <= 0:
+                    block.kill()
+
+            self.LevelShift -= 10
+
+            if self.PlayerGroup.sprite.rect.x < 120 and not self.PlayerGroup.sprite.Stuck:
+                self.PlayerGroup.sprite.rect.x += 2
+
+        else:
+            self.PlayerGroup.sprite.rect.x += 10
+
+        if not self.PlayerGroup.sprite.Surface:
+            self.PlayerGroup.sprite.rect.y += self.PlayerGroup.sprite.Gravi        # If we have nothing under our feet, move the Player 10 px up/down
+        
+        Collisions = pygame.sprite.spritecollide(self.PlayerGroup.sprite, self.AllBlocksGroup, False)      # A list of Blocks that collide with the Player
+        Leftmost, Walls, NotWalls = CollisionCheck.BuildWall(Collisions, self.PlayerGroup.sprite)
+        
+        if Walls:
+            RECTS = list((b.rect.x, b.rect.y) for b in Walls)
+            #print("walls:",RECTS)
+            self.PlayerGroup.sprite.rect.x = Leftmost - 40
+            self.PlayerGroup.sprite.Surface = False
+            self.PlayerGroup.sprite.Stuck = True
+        else: 
+            self.PlayerGroup.sprite.Stuck = False
+
+        NotWalls = list(filter(   (lambda a: a.rect.y+40 >= self.PlayerGroup.sprite.rect.y+40 
+                                       if (     self.PlayerGroup.sprite.Gravi > 0    )
+                                       else a.rect.y <= self.PlayerGroup.sprite.rect.y
+                                       ), 
+                                    NotWalls
+                                    )
+                            )
+        if (NotWalls 
+            and not self.PlayerGroup.sprite.Surface 
+            and NotWalls[0].rect.x != Leftmost): 
+
+            IDS = list((b.rect.x, b.rect.y) for b in NotWalls)
+            #print("notwalls:",IDS)
+            Limit = CollisionCheck.BuildFloor(NotWalls, self.PlayerGroup.sprite)
+            self.PlayerGroup.sprite.rect.y = Limit-40 if self.PlayerGroup.sprite.Gravi > 0 else Limit
+            self.PlayerGroup.sprite.Surface = True
+
+        elif (not NotWalls
+              and self.PlayerGroup.sprite.Surface):
+            self.PlayerGroup.sprite.rect.y += 1 if self.PlayerGroup.sprite.Gravi > 0 else -1
+            collisions2 = pygame.sprite.spritecollide(self.PlayerGroup.sprite, self.AllBlocksGroup, False)
+            if not collisions2: 
+                self.PlayerGroup.sprite.Surface = False
+            self.PlayerGroup.sprite.rect.y -= 1 if self.PlayerGroup.sprite.Gravi > 0 else -1
+
+    
+
 
 
 

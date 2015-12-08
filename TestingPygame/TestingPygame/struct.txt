@@ -1,0 +1,10 @@
+class: Game ---> Window(-->height, width), Caption
+   |
+   v
+   class: Level --->  background image(-->width), stages
+      |
+      v
+      class: Stage	in-game alias 'environment'. 
+         |
+         v
+         class: Blockdata

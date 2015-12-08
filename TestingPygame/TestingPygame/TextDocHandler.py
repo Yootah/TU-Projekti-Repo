@@ -1,11 +1,18 @@
 ﻿class BlockData(object):
     """description of class"""
     import re
-    blockDict = {}
     regexName = re.compile('.bmp$')
     regexNumber = re.compile(r'\d \d')
-    worldEnvi = {'#': 'Box01D.bmp' }
-    maxLength = 0
+    worldEnvi = {'#': 'Box01D.bmp', 
+                 "I": "Box02D.bmp", 
+                 "i":  "Box03D.bmp", 
+                 "t": "tree.bmp", 
+                 "S": "spikes.bmp",
+                 "s": "spikesU.bmp"}
+
+    def __init__(self):
+        self.maxLength = 0
+        self.blockDict = {}
 
     def ReadFile(self, filename): 
         """Gimme a file and imma make u a blockDict. """
@@ -19,23 +26,20 @@
                 self.blockDict[imageName].append(tuple(int(x) for x in row.strip().split()))
         file.close()
 
-    def ReadHashes(self, filename):
+    def ReadHashes(self, filename, n):
         height = -1
         length = -1
         file = open(filename)
         for row in file:
-            print(row)
-            print(row.strip())
             height +=1
             for piece in row:
                 length +=1
                 if piece in self.worldEnvi:
-                    if length > self.maxLength:
-                        self.maxLength = length
                     piece_name = self.worldEnvi[piece]
-                    piece_x = 40*length
+                    piece_x = 40*length + n
                     piece_y = 40*height
-                    print(piece, length, height)
+                    if 40*length > self.maxLength:
+                        self.maxLength = 40*length
                     if piece_name in self.blockDict:
                         if (piece_x, piece_y) not in self.blockDict[piece_name]:
                             self.blockDict[piece_name].append((piece_x, piece_y))
