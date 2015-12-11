@@ -1,6 +1,6 @@
 ﻿import pygame
 
-class SpriteBox(pygame.sprite.Sprite):
+class Block(pygame.sprite.Sprite):
     """See on õige klass kasti jaoks"""
 
     def __init__(self, name, coords, id):

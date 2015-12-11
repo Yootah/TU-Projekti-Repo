@@ -1,7 +1,7 @@
 ﻿import pygame
-from Player import Player
-from TextDocHandler import BlockData
-from SpritelikeBox import SpriteBox
+from Player import *
+from TextDocHandler import *
+from Block import *
 
 class Stage(object):
     """A stage in a level. """
@@ -18,7 +18,7 @@ class Stage(object):
         DataObject.ReadHashes(name+".txt", levelObject.Width)
         for picName in DataObject.blockDict:
             for blockPlace in DataObject.blockDict[picName]:
-                block = SpriteBox(picName, blockPlace, name+"-"+str(self.IdCount))
+                block = Block(picName, blockPlace, name+"-"+str(self.IdCount))
                 levelObject.AllBlocksGroup.add(block)
                 self.IdCount += 1
         self.StageLength = DataObject.maxLength + 40

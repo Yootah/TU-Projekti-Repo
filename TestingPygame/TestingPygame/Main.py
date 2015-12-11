@@ -3,25 +3,21 @@
 
 import pygame
 import time
-from Environment import Stage
-from SpritelikeBox import SpriteBox
-from Player import Player
+from Stage import *
+from Block import *
+from Player import *
 from TextDocHandler import BlockData
-from Level import Level
+from Level import *
+from GameWindow import *
 
 
 pygame.init()
+gameWindow = GameWindow()
 
-H = 480
-W = 1000
-pygameWindow = pygame.display.set_mode( (W, H) )
-pygame.display.set_caption("TestingPygame")
-
-level = Level(pygameWindow, "bckg.bmp", "Level 1") 
-level.DrawFrame(pygameWindow)
+level = gameWindow.Level
+level.DrawFrame(gameWindow)
 
 done = False
-Freeze = False
 LoopCount = 0
 t0 = time.time()
 
@@ -32,12 +28,9 @@ while done==False:
         if LoopCount % 3 == 0:      #  For the slow movement of the background image; might be completely unnecessary
             level.CurrentX -= 1     #/
 
-
     level.ShiftFrame()
-    level.DrawFrame(pygameWindow)
-
-    #print(level.LevelShift, level.Width, level.LevelShift + level.Width)
-    
+    level.DrawFrame(gameWindow)
+        
     if level.LevelShift + level.Width <= 1000 and not level.EndReached:
         #print("STOP!")
         level.EndReached = True

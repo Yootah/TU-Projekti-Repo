@@ -11,7 +11,7 @@
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <Name>Game</Name>
+    <Name>Sidescroller Runner Game</Name>
     <RootNamespace>TestingPygame</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -26,13 +26,13 @@
     <Compile Include="Level.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Game.py">
+    <Compile Include="GameWindow.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Collisions.py">
+    <Compile Include="CollisionCheck.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Environment.py">
+    <Compile Include="Stage.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Player.py">
@@ -41,7 +41,7 @@
     <Compile Include="Randomiser.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="SpritelikeBox.py">
+    <Compile Include="Block.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Main.py" />

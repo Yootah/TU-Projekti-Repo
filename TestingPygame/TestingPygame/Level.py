@@ -1,8 +1,8 @@
 ﻿import pygame
 from Player import Player
-from SpritelikeBox import SpriteBox
-from Collisions import CollisionCheck
-from Environment import Stage
+from Block import Block
+from CollisionCheck import CollisionCheck
+from Stage import Stage
 
 class Level(object):
     """..."""
@@ -16,7 +16,6 @@ class Level(object):
 
         # Collision check has level-wide scope
         self.AllBlocksGroup = pygame.sprite.Group()
-        self.AllBlocksXY = list()
 
         self.Bckgr = pygame.image.load(imageName)
         self.Name = name
@@ -32,9 +31,9 @@ class Level(object):
 
 
     def DrawFrame(self, screen):
-        screen.blit(self.Bckgr, (self.CurrentX,0))
-        self.AllBlocksGroup.draw(screen)
-        self.PlayerGroup.draw(screen)
+        screen.Window.blit(self.Bckgr, (self.CurrentX,0))
+        self.AllBlocksGroup.draw(screen.Window)
+        self.PlayerGroup.draw(screen.Window)
 
         
 
@@ -61,8 +60,8 @@ class Level(object):
         if not self.PlayerGroup.sprite.Surface:
             self.PlayerGroup.sprite.rect.y += self.PlayerGroup.sprite.Gravi        # If we have nothing under our feet, move the Player 10 px up/down
         
-        Collisions = pygame.sprite.spritecollide(self.PlayerGroup.sprite, self.AllBlocksGroup, False)      # A list of Blocks that collide with the Player
-        Leftmost, Walls, NotWalls = CollisionCheck.BuildWall(Collisions, self.PlayerGroup.sprite)
+        collisions = pygame.sprite.spritecollide(self.PlayerGroup.sprite, self.AllBlocksGroup, False)      # A list of Blocks that collide with the Player
+        Leftmost, Walls, NotWalls = CollisionCheck.BuildWall(collisions, self.PlayerGroup.sprite)
         
         if Walls:
             RECTS = list((b.rect.x, b.rect.y) for b in Walls)
