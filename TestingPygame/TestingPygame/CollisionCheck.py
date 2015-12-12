@@ -51,5 +51,9 @@ class CollisionCheck(object):
                 elif box.rect.y+40 == lowest:
                     floors.append(box)
             return lowest
-           
-                    
+
+    def LostTheGame(player):
+        return True if player.rect.x <= -40 or player.rect.y <= -40 or player.rect.y >= 480 else False
+
+    def LevelCleared(player):
+        return True if player.rect.x >= 1000 else False

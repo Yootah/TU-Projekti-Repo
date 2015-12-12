@@ -23,30 +23,40 @@ t0 = time.time()
 
 while done==False:
 
-    if not level.EndReached:  # <-----otherwise the level is through, no more stages.
+    if not (level.EndReached or level.Lost):  # <-----otherwise the level is through, no more stages.
         LoopCount += 1              #\
         if LoopCount % 3 == 0:      #  For the slow movement of the background image; might be completely unnecessary
             level.CurrentX -= 1     #/
+    elif level.EndReached:
+        if level.Cleared:
+            print("CLEARED!")
+            done = True
+            # here goes the level transition or winning screen
+    elif level.Lost:
+        print("LOST")
+        #Losing screen here
+        done = True
 
-    level.ShiftFrame()
-    level.DrawFrame(gameWindow)
+    if not (level.Lost or level.Cleared):
+        level.ShiftFrame()
+        level.DrawFrame(gameWindow)
         
-    if level.LevelShift + level.Width <= 1000 and not level.EndReached:
-        #print("STOP!")
-        level.EndReached = True
+        if level.LevelShift + level.Width <= 1000 and not level.EndReached:
+            level.EndReached = True
 
-    for event in pygame.event.get():                                                                    #\
-            if event.type == pygame.QUIT:                                                               # \
-                done = True                                                                             #  \
-            if event.type == pygame.KEYDOWN and level.PlayerGroup.sprite.Surface:                       #    Looking out for key spamming, ragequitting etc (aka events).
-               if event.key == pygame.K_SPACE:                                                          #  /
-                    #print("\n  *SPACE*")                                                                # /
-                    level.PlayerGroup.sprite.FlipGravi()                                   #/
+        for event in pygame.event.get():                                                                    #\
+                if event.type == pygame.QUIT:                                                               # \
+                    done = True                                                                             #  \
+                if event.type == pygame.KEYDOWN and level.PlayerGroup.sprite.Surface:                       #    Looking out for key spamming, ragequitting etc (aka events).
+                   if event.key == pygame.K_SPACE:                                                          #  /
+                        #print("\n  *SPACE*")                                                               # /
+                        level.PlayerGroup.sprite.FlipGravi()                                                #/
+
 
     t = time.time()                                                #\
     timechange = t - t0                                            # \
-    if timechange < 0.04:                                          #    Making the game run smoothly both on slower & faster machines (aka frame timer)
-        pygame.time.delay(40 - round((timechange)*1000))           #  /
+    if timechange < 0.035:                                          #    Making the game run smoothly both on slower & faster machines (aka frame timer)
+        pygame.time.delay(35 - round((timechange)*1000))           #  /
     pygame.display.flip()                                          # /   
     t0 = time.time()                                               #/
 

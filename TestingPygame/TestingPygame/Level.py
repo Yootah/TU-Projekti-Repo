@@ -27,6 +27,8 @@ class Level(object):
         self.LevelShift = int()
         self.CurrentX = int()
         self.EndReached = False
+        self.Cleared = False
+        self.Lost = False
                 
         for n in range(1,4):
             s = Stage(str(n).rjust(2, "0"), self)
@@ -57,7 +59,7 @@ class Level(object):
             if self.PlayerGroup.sprite.rect.x < 120 and not self.PlayerGroup.sprite.Stuck:
                 self.PlayerGroup.sprite.rect.x += 2
 
-        else:
+        elif self.EndReached:
             self.PlayerGroup.sprite.rect.x += 10
 
         if not self.PlayerGroup.sprite.Surface:
@@ -99,6 +101,13 @@ class Level(object):
             if not collisions2: 
                 self.PlayerGroup.sprite.Surface = False
             self.PlayerGroup.sprite.rect.y -= 1 if self.PlayerGroup.sprite.Gravi > 0 else -1
+        
+        if not self.Lost:
+            self.Lost = CollisionCheck.LostTheGame(self.PlayerGroup.sprite)
+        if not self.Cleared:
+            self.Cleared = CollisionCheck.LevelCleared(self.PlayerGroup.sprite)
+
+        
 
     
 
