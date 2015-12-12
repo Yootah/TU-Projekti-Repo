@@ -10,7 +10,7 @@ from os import getcwd
 class Level(object):
     """..."""
    
-    def __init__(self, window, imageName = "bckg.bmp", name = "Level 1"):
+    def __init__(self, window, imageName = "bckg1.bmp", name = "Level 1"):
         """
         nop. 
         """

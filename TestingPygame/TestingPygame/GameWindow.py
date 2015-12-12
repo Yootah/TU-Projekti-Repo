@@ -6,7 +6,7 @@ class GameWindow(object):
     
     W = 1000
     H = 480
-    BckgrImg = {"1": "bckg.bmp"}
+    BckgrImg = {"1": "bckg1.bmp", "2": "bckg2.bmp", "3": "bckg3.bmp", "4": "bckg4.bmp"}
     grid = pygame.image.load("data/screens/whitegrid.bmp")
     grid.set_colorkey((163,73,164))
     
@@ -15,15 +15,15 @@ class GameWindow(object):
         Also adding the first level. """
         
         self.Window = pygame.display.set_mode( (self.W, self.H) )
-        pygame.display.set_caption("Sidescroller Runner Game")
+        pygame.display.set_caption("Yoo Asura")
         
-        self.Level = Level(self.Window, "bckg.bmp", "Level 1")
+        self.Level = Level(self.Window, "bckg1.bmp", "Level 1")
 
 
     def NextLevel(self, previous):
         """A new level object after the previous one is through. """
-        n = "%d" % previous+1
-        newLevel = Level(self, imageName = self.BckgrImg[n], name = "Level %d" % n)
+        n = previous+1
+        newLevel = Level(self, imageName = self.BckgrImg[str(n)], name = "Level %d" % n)
         del self.Level
         self.Level = newLevel
 

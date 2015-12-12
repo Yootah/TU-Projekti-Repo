@@ -33,7 +33,10 @@ while done==False:
     elif level.EndReached and not (level.Lost or level.Paused):
         if level.Cleared:
             print("CLEARED!")
-            done = True
+            #done = True
+            gameWindow.NextLevel(int(gameWindow.Level.Name[-1]))
+            level = gameWindow.Level
+            level.DrawFrame(gameWindow)
             # here goes the level transition or winning screen
     elif level.Lost and not level.Paused:
         print("LOST")
@@ -67,7 +70,7 @@ while done==False:
 
     t = time.time()                                                #\
     timechange = t - t0                                            # \
-    if timechange < 0.035:                                          #    Making the game run smoothly both on slower & faster machines (aka frame timer)
+    if timechange < 0.035:                                         #    Making the game run smoothly both on slower & faster machines (aka frame timer)
         pygame.time.delay(35 - round((timechange)*1000))           #  /
     pygame.display.flip()                                          # /   
     t0 = time.time()                                               #/

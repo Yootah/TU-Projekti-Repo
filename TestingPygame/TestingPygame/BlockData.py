@@ -9,7 +9,8 @@ class BlockData(object):
                  "I": "Ice1U.bmp",
                  "i": "Ice1D.bmp",
                  "J": "Ice2U.bmp",
-                 "j": "Ice2D.bmp", 
+                 "j": "Ice2D.bmp",
+                 "L": "Ice3U.bmp",
                  "t": "tree.bmp", 
                  "S": "spikes2U.bmp",
                  "s": "spikes2D.bmp",
@@ -21,8 +22,6 @@ class BlockData(object):
         self.blockDict = {}
 
     def ReadHashes(self, lev, filename, n):
-        if filename == "01.txt":
-            print("OK")
         height = -1
         length = -1
         file = open(join("data/levels", lev, filename))
