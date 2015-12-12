@@ -66,7 +66,7 @@ class Level(object):
             self.PlayerGroup.sprite.rect.y += self.PlayerGroup.sprite.Gravi        # If we have nothing under our feet, move the Player 10 px up/down
         
         collisions = pygame.sprite.spritecollide(self.PlayerGroup.sprite, self.AllBlocksGroup, False)      # A list of Blocks that collide with the Player
-        Leftmost, Walls, NotWalls = CollisionCheck.BuildWall(collisions, self.PlayerGroup.sprite)
+        Leftmost, Walls, NotWalls, Deaded = CollisionCheck.BuildWall(collisions, self.PlayerGroup.sprite)
         
         if Walls:
             RECTS = list((b.rect.x, b.rect.y) for b in Walls)
@@ -90,7 +90,7 @@ class Level(object):
 
             IDS = list((b.rect.x, b.rect.y) for b in NotWalls)
             #print("notwalls:",IDS)
-            Limit = CollisionCheck.BuildFloor(NotWalls, self.PlayerGroup.sprite)
+            Limit, Deaded = CollisionCheck.BuildFloor(NotWalls, self.PlayerGroup.sprite)
             self.PlayerGroup.sprite.rect.y = Limit-40 if self.PlayerGroup.sprite.Gravi > 0 else Limit
             self.PlayerGroup.sprite.Surface = True
 
@@ -102,6 +102,8 @@ class Level(object):
                 self.PlayerGroup.sprite.Surface = False
             self.PlayerGroup.sprite.rect.y -= 1 if self.PlayerGroup.sprite.Gravi > 0 else -1
         
+        if Deaded: self.Lost = True
+
         if not self.Lost:
             self.Lost = CollisionCheck.LostTheGame(self.PlayerGroup.sprite)
         if not self.Cleared:

@@ -13,3 +13,7 @@ class Block(pygame.sprite.Sprite):
         self.rect.x = coords[0]
         self.rect.y = coords[1]
         self.image.set_colorkey((163,73,164))
+        if name[0:5] == 'spike':
+            self.deadly = True
+        else:
+            self.deadly = False
