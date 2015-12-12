@@ -17,7 +17,7 @@ class Player(pygame.sprite.Sprite):
 
         for name in self.PicNames:
             img = pygame.image.load(join("data/player", name))
-            img.set_colorkey((255,255,255))
+            img.set_colorkey((163,73,164))
             self.playerPics[name] = img
 
         self.rect = self.image.get_rect()
@@ -42,11 +42,11 @@ class Player(pygame.sprite.Sprite):
         name = self.image_name
         if self.animCounter == 1:
             self.image_name = name.replace("1","2")
-        elif self.animCounter == 3:
-            self.image_name = name.replace("2","3")
         elif self.animCounter == 5:
+            self.image_name = name.replace("2","3")
+        elif self.animCounter == 9:
             self.image_name = name.replace("3","2")
-        elif self.animCounter == 7:
+        elif self.animCounter == 13:
             self.image_name = name.replace("2","1")
             self.animCounter = 0
         self.image = self.playerPics[self.image_name]

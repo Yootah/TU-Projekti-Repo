@@ -23,6 +23,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="FunctionalScreen.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Level.py">
       <SubType>Code</SubType>
     </Compile>
