@@ -6,11 +6,15 @@ class BlockData(object):
 
     worldEnvi = {'G': 'Grass1U.bmp', 
                  'g': 'Grass1D.bmp', 
-                 "I": "Ice1U.bmp", 
-                 "i": "Ice2U.bmp", 
+                 "I": "Ice1U.bmp",
+                 "i": "Ice1D.bmp",
+                 "J": "Ice2U.bmp",
+                 "j": "Ice2D.bmp", 
                  "t": "tree.bmp", 
                  "S": "spikes2U.bmp",
-                 "s": "spikes2D.bmp"}
+                 "s": "spikes2D.bmp",
+                 "C": "spikes1U.bmp",
+                 "c": "spikes1D.bmp"}
 
     def __init__(self):
         self.maxLength = 0

@@ -1,11 +1,12 @@
-gggggggggggggggggggg
-
-          t t
-          GGG
-
-
-
-
-
-t
-GGGGGGGGGGGGGGGGGGGG
+1           gggggg
+2            c   c
+3          
+4          
+5
+6    GGGG
+7
+8
+9
+10
+11                   C
+12            GGGGGGGG
