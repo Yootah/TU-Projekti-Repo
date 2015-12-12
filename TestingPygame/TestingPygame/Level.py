@@ -23,12 +23,15 @@ class Level(object):
         self.Bckgr = pygame.image.load(join("data/levels", name[-1], imageName))
         self.Name = name
         self.PlayerGroup.add(Player())
+
         self.Width = int()
         self.LevelShift = int()
         self.CurrentX = int()
+
         self.EndReached = False
         self.Cleared = False
         self.Lost = False
+        self.Paused = False
                 
         for n in range(1,4):
             s = Stage(str(n).rjust(2, "0"), self)
