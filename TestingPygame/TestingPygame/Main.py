@@ -55,12 +55,12 @@ while done==False:
 
 
 
-    for event in pygame.event.get():                                                                    #\
-            if event.type == pygame.QUIT:                                                               # \
-                done = True                                                                             #  \
-            if event.type == pygame.KEYDOWN and level.PlayerGroup.sprite.Surface:                       #    Looking out for key spamming, ragequitting etc (aka events).
-               if event.key == pygame.K_SPACE:                                                          # /
-                    level.PlayerGroup.sprite.FlipGravi()                                                #/
+    for event in pygame.event.get():                                                                                         #\
+            if event.type == pygame.QUIT:                                                                                    # \
+                done = True                                                                                                  #  \
+            if event.type == pygame.KEYDOWN:                                                                                 #    Looking out for key spamming, ragequitting etc (aka events).
+               if event.key == pygame.K_SPACE and level.PlayerGroup.sprite.Surface and not level.Paused:                     # /
+                    level.PlayerGroup.sprite.FlipGravi()                                                                     #/
                elif event.key == pygame.K_p:
                    if level.Paused:
                        level.Paused = False
