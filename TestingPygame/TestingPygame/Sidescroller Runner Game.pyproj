@@ -45,7 +45,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Main.py" />
-    <Compile Include="TextDocHandler.py" />
+    <Compile Include="BlockData.py" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

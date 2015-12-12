@@ -6,7 +6,7 @@ import time
 from Stage import *
 from Block import *
 from Player import *
-from TextDocHandler import BlockData
+from BlockData import BlockData
 from Level import *
 from GameWindow import *
 

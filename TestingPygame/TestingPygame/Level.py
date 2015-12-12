@@ -1,13 +1,16 @@
 ﻿import pygame
-from Player import Player
-from Block import Block
-from CollisionCheck import CollisionCheck
-from Stage import Stage
+from Player import *
+from Block import *
+from CollisionCheck import *
+from Stage import *
+from BlockData import BlockData as dt
+from os.path import join
+from os import getcwd
 
 class Level(object):
     """..."""
    
-    def __init__(self, window, imageName = "bckg.bmp", name = "Level x"):
+    def __init__(self, window, imageName = "bckg.bmp", name = "Level 1"):
         """
         nop. 
         """
@@ -17,7 +20,7 @@ class Level(object):
         # Collision check has level-wide scope
         self.AllBlocksGroup = pygame.sprite.Group()
 
-        self.Bckgr = pygame.image.load(imageName)
+        self.Bckgr = pygame.image.load(join("data/levels", name[-1], imageName))
         self.Name = name
         self.PlayerGroup.add(Player())
         self.Width = int()

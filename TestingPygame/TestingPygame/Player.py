@@ -1,4 +1,7 @@
 ﻿import pygame
+from BlockData import BlockData as dt
+from os.path import join
+
 class Player(pygame.sprite.Sprite):
     """Tegelane"""
     Gravi = 10
@@ -6,19 +9,17 @@ class Player(pygame.sprite.Sprite):
     Surface = False
     playerPics = {}
     PicNames = ["PlayerUa1.bmp","PlayerUa2.bmp","PlayerUa3.bmp", "PlayerDa1.bmp","PlayerDa2.bmp","PlayerDa3.bmp"]
-    #image_U = pygame.image.load("Player01U.bmp")
-    #image_U.set_colorkey((255, 255, 255))
-    #image_D = pygame.image.load("Player01D.bmp")
-    #image_D.set_colorkey((255, 255, 255))
     image_name = "PlayerUa1.bmp"
 
     def __init__(self):
         super().__init__()
-        self.image = pygame.image.load("PlayerUa1.bmp")
+        self.image = pygame.image.load(join("data/player","PlayerUa1.bmp"))
+
         for name in self.PicNames:
-            img = pygame.image.load(name)
+            img = pygame.image.load(join("data/player", name))
             img.set_colorkey((255,255,255))
             self.playerPics[name] = img
+
         self.rect = self.image.get_rect()
         self.image.set_colorkey((255, 255, 255))
         self.rect.x = 120
@@ -41,7 +42,6 @@ class Player(pygame.sprite.Sprite):
         name = self.image_name
         if self.animCounter == 1:
             self.image_name = name.replace("1","2")
-            #print(self.image_name, "HERE")
         elif self.animCounter == 3:
             self.image_name = name.replace("2","3")
         elif self.animCounter == 5:
@@ -49,7 +49,6 @@ class Player(pygame.sprite.Sprite):
         elif self.animCounter == 7:
             self.image_name = name.replace("2","1")
             self.animCounter = 0
-        #print("IMAGENAME", self.image_name, self.animCounter)
         self.image = self.playerPics[self.image_name]
 
             

@@ -1,21 +1,21 @@
 ﻿import pygame
-from Player import *
-from TextDocHandler import *
+from BlockData import *
 from Block import *
+from os.path import join
 
 class Stage(object):
     """A stage in a level. """
-   
 
     def __init__(self, name, levelObject):
-
+        """ name - "01"
+            levelObject - Level() 
+            """
         self.StageLength = int()
-        #self.BlockGroup = pygame.sprite.Group()
         self.Name = name
         self.IdCount = 0
 
         DataObject = BlockData()
-        DataObject.ReadHashes(name+".txt", levelObject.Width)
+        DataObject.ReadHashes(levelObject.Name[-1], name+".txt", levelObject.Width)
         for picName in DataObject.blockDict:
             for blockPlace in DataObject.blockDict[picName]:
                 block = Block(picName, blockPlace, name+"-"+str(self.IdCount))
@@ -24,4 +24,3 @@ class Stage(object):
         self.StageLength = DataObject.maxLength + 40
         del DataObject
         levelObject.Width += self.StageLength
-        #print(list(b.Id for b in self.BlockGroup))

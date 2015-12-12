@@ -1,35 +1,27 @@
-﻿class BlockData(object):
+﻿from os import getcwd
+from os.path import join
+
+class BlockData(object):
     """description of class"""
-    import re
-    regexName = re.compile('.bmp$')
-    regexNumber = re.compile(r'\d \d')
-    worldEnvi = {'#': 'Box01D.bmp', 
-                 "I": "Box02D.bmp", 
-                 "i":  "Box03D.bmp", 
+
+    worldEnvi = {'G': 'Grass1U.bmp', 
+                 'g': 'Grass1D.bmp', 
+                 "I": "Ice1U.bmp", 
+                 "i": "Ice2U.bmp", 
                  "t": "tree.bmp", 
                  "S": "spikes.bmp",
-                 "s": "spikesU.bmp"}
+                 "s": "spikesD.bmp"}
 
     def __init__(self):
         self.maxLength = 0
         self.blockDict = {}
 
-    def ReadFile(self, filename): 
-        """Gimme a file and imma make u a blockDict. """
-        named = False
-        file = open(filename)
-        for row in file:
-            if self.regexName.search(row.strip()):
-                imageName = row.strip()
-                self.blockDict[imageName] = []
-            elif self.regexNumber.search(row.strip()):
-                self.blockDict[imageName].append(tuple(int(x) for x in row.strip().split()))
-        file.close()
-
-    def ReadHashes(self, filename, n):
+    def ReadHashes(self, lev, filename, n):
+        if filename == "01.txt":
+            print("OK")
         height = -1
         length = -1
-        file = open(filename)
+        file = open(join("data/levels", lev, filename))
         for row in file:
             height +=1
             for piece in row:
