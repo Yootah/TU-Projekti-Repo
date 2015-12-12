@@ -1,7 +1,7 @@
-1           GGGGG     
-2         GG     GG
-3       GG         G
-4GGGGGGG            GG
+1           ggggg     
+2         gg     gg
+3       gg         g
+4ggggggg            gg
 5   
 6               C
 7           GGGGGC   
