@@ -2,9 +2,9 @@
 2         GG     GG
 3       GG         G
 4GGGGGGG            GG
-5  c 
-6             C
-7           GGGGG    
+5   
+6             CC
+7           GGGGGC   
 8         GG     GG
 9        G         G
 10 C   GG           GG

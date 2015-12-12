@@ -38,7 +38,7 @@ while done==False:
     elif level.Lost and not level.Paused:
         print("LOST")
         #Losing screen here
-        #done = True
+        done = True
 
     if not (level.Lost or level.Cleared):
         if not level.Paused:
