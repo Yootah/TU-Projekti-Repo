@@ -1,0 +1,12 @@
+1
+2           iiiii
+3  iiiii        s
+4      s               
+5
+6     IIIII  S
+7     L   L  IIIII
+8   S L   L
+IIIIIIL   L       IIII
+10
+11              
+12

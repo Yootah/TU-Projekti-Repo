@@ -1,9 +1,12 @@
-IIIIIIIIIIIIIIIIIIIIIIIIIIII
-
-
-
-
-
-
-
-IIIIIIIIIIIIIIIIIIIIIIIIIIII
+1
+2
+3     iiiiiii
+4           L    iiiiL
+5           L        L
+6IIIII      L        L
+7                    L
+8
+9         IIIII    III
+10
+11
+12

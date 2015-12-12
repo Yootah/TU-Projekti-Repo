@@ -1,4 +1,4 @@
-1     GGGGGGGGGGGGG   
+1     ggggggggggggg   
 2     c           c
 3
 4
@@ -8,5 +8,5 @@
 8
 9
 10
-11   C       C    
+11   C       C       
 12GGGGG      GGGGGGGGG
