@@ -29,7 +29,7 @@ class Player(pygame.sprite.Sprite):
     def FlipGravi(self):
         self.Surface = False
         self.Gravi *= -1
-        name = self.image_name
+        name = self.image_name  
         if name[-7] == "U":
             self.image_name = name.replace("U","D")
             self.image = self.playerPics[self.image_name]
