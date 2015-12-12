@@ -33,7 +33,7 @@ class Level(object):
         self.Lost = False
         self.Paused = False
                 
-        for n in range(1,4):
+        for n in range(1,5):
             s = Stage(str(n).rjust(2, "0"), self)
             del s
 
