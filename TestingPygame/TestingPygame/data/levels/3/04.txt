@@ -1,0 +1,12 @@
+1
+2        gggg    
+3            ggggg
+4ggggL              gg
+5    L   L     
+6    L   L  GGGGG
+7        L       GGGG
+8    GGGGL
+9
+10
+11
+12

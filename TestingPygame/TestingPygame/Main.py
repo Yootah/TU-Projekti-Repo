@@ -40,8 +40,13 @@ while done==False:
             # here goes the level transition or winning screen
     elif level.Lost and not level.Paused:
         print("LOST")
+        if done == False:
+            gameWindow.RestartLevel(int(gameWindow.Level.Name[-1]))
+            level = gameWindow.Level
+            level.DrawFrame(gameWindow)
+        else:
         #Losing screen here
-        done = True
+            done = True
 
     if not (level.Lost or level.Cleared):
         if not level.Paused:

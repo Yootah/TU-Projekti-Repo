@@ -29,3 +29,13 @@ class GameWindow(object):
 
     def DisplayPause(self):
         self.Window.blit(self.grid, (0,0))
+
+    def RestartLevel(self, n):
+        """Continue with the level you failed on"""
+
+        newLevel = Level(self, imageName = self.BckgrImg[str(n)], name = "Level %d" % n)
+        del self.Level
+        self.Level = newLevel
+
+
+        

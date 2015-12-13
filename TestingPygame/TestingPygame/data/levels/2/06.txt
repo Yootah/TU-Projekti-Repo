@@ -2,11 +2,11 @@
 2                 ii
 3
 4           ii      II     
-5   
-6             III
-7
-8           
-9   iiii
-10
-11    S
-IIIIIII
+5                    L
+6             III    L
+7                    L
+8                    L  
+9   iiii             L
+10                   L
+11    S              L
+IIIIIII              L

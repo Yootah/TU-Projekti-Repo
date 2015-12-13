@@ -1,0 +1,12 @@
+1                  ggg
+2
+3              LLLL
+4
+5  L   LL   L      GGG
+6                    L
+7                    L
+8    LL  LLL         L
+GG                   L
+1L                   L
+1L                   L
+1L                   L
