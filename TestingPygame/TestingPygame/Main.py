@@ -41,13 +41,15 @@ while done==False:
                     gameWindow.StartScreen = False
                     del strtscrn
                     level.DrawFrame(gameWindow)
+                elif event.key == pygame.K_ESCAPE:
+                    done = True
 
     if not (level.EndReached or level.Lost or level.Paused or gameWindow.StartScreen):  # <-----otherwise the level is through, no more stages.
         LoopCount += 1              #\
         if LoopCount % 3 == 0:      #  For the slow movement of the background image; might be completely unnecessary
             level.CurrentX -= 1     #/
 
-    elif level.EndReached and not (level.Lost or level.Paused or gameWindow.StartScreen):
+    elif level.EndReached and not (level.Lost or level.Paused or gameWindow.StartScreen or gameWindow.WinScreen):
         if level.Cleared:
             if level.Name[-1] != "4":
                 print("CLEARED!")
@@ -59,7 +61,8 @@ while done==False:
             else:
                 wnscrn = WinScreen(gameWindow)
                 print("Win!")
-                done = True
+                gameWindow.WinScreen = True
+                #done = True
     elif level.Lost and not level.Paused and not gameWindow.StartScreen:
         #if done == False:
         
@@ -84,12 +87,12 @@ while done==False:
 
 
 
-    for event in pygame.event.get():                                                                                         #\
-            if event.type == pygame.QUIT:                                                                                    # \
-                done = True                                                                                                  #  \
-            if event.type == pygame.KEYDOWN:                                                                                 #    Looking out for key spamming, ragequitting etc (aka events).
-               if event.key == pygame.K_SPACE and level.PlayerGroup.sprite.Surface and not level.Paused:                     # /
-                    level.PlayerGroup.sprite.FlipGravi()                                                                     #/
+    for event in pygame.event.get():                                                                                                    #\
+            if event.type == pygame.QUIT:                                                                                               # \
+                done = True                                                                                                             #  \
+            if event.type == pygame.KEYDOWN:                                                                                            #    Looking out for key spamming, ragequitting etc (aka events).
+               if event.key == pygame.K_SPACE and level.PlayerGroup.sprite.Surface and not (level.Paused or gameWindow.WinScreen):      # /
+                    level.PlayerGroup.sprite.FlipGravi()                                                                                #/
                elif event.key == pygame.K_p:
                    if level.Paused:
                        level.Paused = False
@@ -97,15 +100,20 @@ while done==False:
                        level.DrawFrame(gameWindow)
                        gameWindow.DisplayPause() 
                        level.Paused = True
-               elif event.key == pygame.K_SPACE and gameWindow.DeathScreen == True and not level.Paused:
+               elif gameWindow.DeathScreen and not level.Paused and event.key == pygame.K_SPACE:
                    gameWindow.DeathScreen = False
                    del dthscrn
                    gameWindow.RestartLevel(int(gameWindow.Level.Name[-1]))
                    level = gameWindow.Level
                    level.DrawFrame(gameWindow)
-               elif event.key == pygame.K_SPACE and gameWindow.WinScreen == True and not level.Paused:
+               elif gameWindow.WinScreen and not level.Paused and event.key == pygame.K_SPACE:
                    del wnscrn
-                   done = False
+                   gameWindow.WinScreen = False
+                   gameWindow.NextLevel(0)
+                   level = gameWindow.Level
+                   level.DrawFrame(gameWindow)
+               elif event.key == pygame.K_ESCAPE:
+                   done = True
 
 
 

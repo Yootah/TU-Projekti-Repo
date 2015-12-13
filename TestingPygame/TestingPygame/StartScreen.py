@@ -6,5 +6,5 @@ class StartScreen(FunctionalScreen):
 
     def __init__(self, window):
         """"""
-        return super().__init__(window, "start", 562, 300, "Press SPACE to start")
+        return super().__init__(window, "start", 562, 300, "                  Press SPACE to start")
 

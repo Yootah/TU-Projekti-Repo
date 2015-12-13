@@ -6,4 +6,4 @@ class WinScreen(FunctionalScreen):
 
     def __init__(self, window):
         """"""
-        return super().__init__(window, "win", 529, 300, "      You won!\nPress SPACE to play again")
+        return super().__init__(window, "win", 529, 300, "      You won! Press SPACE to play again")

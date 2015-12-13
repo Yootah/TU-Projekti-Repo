@@ -33,6 +33,9 @@ class GameWindow(object):
 
     def DisplayPause(self):
         self.Window.blit(self.grid, (0,0))
+        font = pygame.font.SysFont("ariel", 30)
+        label = font.render("To UNPAUSE press P!", 5, (0,0,0))
+        self.Window.blit(label, (370, 220))
 
     def RestartLevel(self, n):
         """Continue with the level you failed on"""
