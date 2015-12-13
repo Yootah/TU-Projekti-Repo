@@ -18,34 +18,36 @@ grid.set_colorkey((163,73,164))
 
 pygame.init()
 gameWindow = GameWindow()
-
 level = gameWindow.Level
-level.DrawFrame(gameWindow)
 
 done = False
 LoopCount = 0
 t0 = time.time()
 
+gameWindow.Window.blit(level.Bckgr,(0,0))
 strtscrn = StartScreen(gameWindow)
-
-while gameWindow.StartScreen:
-    #pygame.event.wait()
-    #print(strtscrn.logoname)
-    for event in pygame.event.get(): 
-        if event.type == pygame.KEYDOWN:                                                                                 
-            if event.key == pygame.K_SPACE:
-                gameWindow.StartScreen = False
-                del strtscrn
 
 
 while done==False:
 
-    if not (level.EndReached or level.Lost or level.Paused):  # <-----otherwise the level is through, no more stages.
+    if gameWindow.StartScreen:
+    #pygame.event.wait()
+    #print(strtscrn.logoname)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                done = True 
+            if event.type == pygame.KEYDOWN:                                                                                 
+                if event.key == pygame.K_SPACE:
+                    gameWindow.StartScreen = False
+                    del strtscrn
+                    level.DrawFrame(gameWindow)
+
+    if not (level.EndReached or level.Lost or level.Paused or gameWindow.StartScreen):  # <-----otherwise the level is through, no more stages.
         LoopCount += 1              #\
         if LoopCount % 3 == 0:      #  For the slow movement of the background image; might be completely unnecessary
             level.CurrentX -= 1     #/
 
-    elif level.EndReached and not (level.Lost or level.Paused):
+    elif level.EndReached and not (level.Lost or level.Paused or gameWindow.StartScreen):
         if level.Cleared:
             if level.Name[-1] != "4":
                 print("CLEARED!")
@@ -57,7 +59,7 @@ while done==False:
             else:
                 print("Win!")
                 done = True
-    elif level.Lost and not level.Paused:
+    elif level.Lost and not level.Paused and not gameWindow.StartScreen:
         #if done == False:
         
         gameWindow.DeathScreen = True
@@ -70,15 +72,14 @@ while done==False:
         #Losing screen here
             #done = True
 
-    if not (level.Lost or level.Cleared):
+    if not (level.Lost or level.Cleared or gameWindow.StartScreen):
         if not level.Paused:
             level.ShiftFrame()
             if level.LevelShift + level.Width <= 1000 and not level.EndReached:
                 level.EndReached = True
             level.DrawFrame(gameWindow)
-        else:
-            level.DrawFrame(gameWindow)
-            gameWindow.DisplayPause()     
+        #else:
+                
 
 
 
@@ -92,6 +93,8 @@ while done==False:
                    if level.Paused:
                        level.Paused = False
                    else:
+                       level.DrawFrame(gameWindow)
+                       gameWindow.DisplayPause() 
                        level.Paused = True
                elif event.key == pygame.K_SPACE and gameWindow.DeathScreen == True and not level.Paused:
                    gameWindow.DeathScreen = False
