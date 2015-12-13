@@ -19,6 +19,10 @@ class GameWindow(object):
         
         self.Level = Level(self.Window, "bckg1.bmp", "Level 1")
 
+        self.StartScreen = False
+        self.DeathScreen = False
+        self.WinScreen = False
+
 
     def NextLevel(self, previous):
         """A new level object after the previous one is through. """

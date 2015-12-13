@@ -3,16 +3,22 @@
 class FunctionalScreen(object):
     """Base class for title/end screen. """
 
-    def __init__(self, window, type = "start", rectx=360, recty=600):
+    def __init__(self, window, type, rectx=int(), recty=int(), string=str()):
 
-        background = window.grid
-        logo = pygame.image.load("/data/screens/"+type+"logo.bmp")
-        logo.set_colorkey((163,73,164))
-        buttonImage = pygame.image.load("/data/screens/"+type+"button1.bmp")
+        self.background = window.grid
+        self.logoname = type+"logo.bmp"
+        self.logo = pygame.image.load("/data/screens/"+type+"logo.bmp")
+        self.logo.set_colorkey((163,73,164))
 
         window.Window.blit(background, (0,0))
-        window.Window.blit(logo, (500-rectx/2, 0-recty))
-        window.Window.blit(buttonImage, (400, 360))
+        window.Window.blit(logo, (500-rectx//2, 40))
+
+        font = pygame.font.SysFont("calibri", 20)
+        label = myfont.render(string, 5, (0,0,0))
+        window.Window.blit(label, (500-len(string)//2*15, 400))
+        
+
+
 
 
 
