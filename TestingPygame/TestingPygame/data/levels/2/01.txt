@@ -1,7 +1,7 @@
 1
 2
-3     iiiiiii
-4           L    iiiiL
+3     iiiiiij
+4           L    iiiij
 5           L        L
 6IIIII      L        L
 7                    L

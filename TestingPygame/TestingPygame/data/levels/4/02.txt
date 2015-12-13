@@ -1,0 +1,14 @@
+1   bb
+2 bb qbb          
+bb           bbbb   bbb
+4                     
+5  VPPPP         BBB  P
+6         BBBB        
+7
+BB
+9 BB QBB
+10  BB
+11
+12
+
+

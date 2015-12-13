@@ -1,12 +1,12 @@
 1
-2           iiiii
-3  iiiii        s
+2           iiiij
+3  iiiij        s
 4      s               
 5
-6     IIIII  S
-7     L   L  IIIII
+6     JIIIJ  S
+7     L   L  JIIII
 8   S L   L
-IIIIIIL   L       IIII
+IIIIJIL   L       IIII
 10
 11              
 12
