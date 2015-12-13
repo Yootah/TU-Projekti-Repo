@@ -23,6 +23,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DeathScreen.py" />
     <Compile Include="FunctionalScreen.py">
       <SubType>Code</SubType>
     </Compile>
@@ -49,6 +50,8 @@
     </Compile>
     <Compile Include="Main.py" />
     <Compile Include="BlockData.py" />
+    <Compile Include="StartScreen.py" />
+    <Compile Include="WinScreen.py" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
