@@ -57,6 +57,7 @@ while done==False:
                 level.DrawFrame(gameWindow)
                 # here goes the level transition or winning screen
             else:
+                wnscrn = WinScreen(gameWindow)
                 print("Win!")
                 done = True
     elif level.Lost and not level.Paused and not gameWindow.StartScreen:
@@ -102,6 +103,9 @@ while done==False:
                    gameWindow.RestartLevel(int(gameWindow.Level.Name[-1]))
                    level = gameWindow.Level
                    level.DrawFrame(gameWindow)
+               elif event.key == pygame.K_SPACE and gameWindow.WinScreen == True and not level.Paused:
+                   del wnscrn
+                   done = False
 
 
 
