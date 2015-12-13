@@ -32,12 +32,16 @@ while done==False:
 
     elif level.EndReached and not (level.Lost or level.Paused):
         if level.Cleared:
-            print("CLEARED!")
-            #done = True
-            gameWindow.NextLevel(int(gameWindow.Level.Name[-1]))
-            level = gameWindow.Level
-            level.DrawFrame(gameWindow)
-            # here goes the level transition or winning screen
+            if level.Name[-1] != "4":
+                print("CLEARED!")
+                #done = True
+                gameWindow.NextLevel(int(gameWindow.Level.Name[-1]))
+                level = gameWindow.Level
+                level.DrawFrame(gameWindow)
+                # here goes the level transition or winning screen
+            else:
+                print("Win!")
+                done = True
     elif level.Lost and not level.Paused:
         print("LOST")
         if done == False:

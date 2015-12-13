@@ -18,11 +18,21 @@ class BlockData(object):
                  "c": "spikes1D.bmp",
                  "M": "Molten1U.bmp",
                  "m": "Molten1D.bmp",
-                 "Z": "spikes3U.bmp",
-                 "z": "spikes3D.bmp",
-                 "X": "spikes4U.bmp",
-                 "x": "spikes4D.bmp",
-                 "N": "Molten3U.bmp"}
+                 "W": "Molten2U.bmp",
+                 "w": "Molten2D.bmp",
+                 "Z": "spikes4U.bmp",
+                 "z": "spikes4D.bmp",
+                 "X": "spikes3U.bmp",
+                 "x": "spikes3D.bmp",
+                 "N": "Molten3U.bmp",
+                 "B": "Branded1U.bmp",
+                 "b": "Branded1D.bmp",
+                 "P": "Branded2U.bmp",
+                 "p": "Branded2D.bmp",
+                 "Q": "spikes5U.bmp",
+                 "q": "spikes5D.bmp",
+                 "V": "spikes5L.bmp",
+                 "v": "spikes5R.bmp"}
 
     def __init__(self):
         self.maxLength = 0
