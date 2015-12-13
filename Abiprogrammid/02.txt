@@ -1,11 +1,12 @@
-s  ss  s  SIIiiI       
-       S II     iI
-       II         II
-IiIIIIi             iI
-
-               S
-           IiIii    
-         II     II
-     S ii         II
- S   II             II
-IIIiI
+1
+2
+3
+gggggggggggggggggggggg
+5  s     s     s     s
+6
+7     S     S     S    
+8GGGGGGGGGGGGGGGGGGGGG
+9
+10
+11
+12

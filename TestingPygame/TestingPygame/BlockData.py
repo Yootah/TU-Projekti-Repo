@@ -20,7 +20,9 @@ class BlockData(object):
                  "m": "Molten1D.bmp",
                  "Z": "spikes3U.bmp",
                  "z": "spikes3D.bmp",
-                 "N": "Molten2U.bmp"}
+                 "X": "spikes4U.bmp",
+                 "x": "spikes4D.bmp",
+                 "N": "Molten3U.bmp"}
 
     def __init__(self):
         self.maxLength = 0

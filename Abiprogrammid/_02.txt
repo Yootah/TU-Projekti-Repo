@@ -1,11 +1,12 @@
-s  ss  s  SGGGGG       
-       S GG     GG
-       GG         GG
-GGGGGGG             GG
-
-               S
-           GGGGG    
-         GG     GG
-     S GG         GG
- S   GG             GG
-GGGGG
+1
+2
+3
+mmmmmmmmmmmmmmmmmmmmmm
+5  z     z     z     z
+6
+7     Z     Z     Z    
+8MMMMMMMMMMMMMMMMMMMMM
+9
+10
+11
+12
