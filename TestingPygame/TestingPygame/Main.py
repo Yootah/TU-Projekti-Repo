@@ -9,6 +9,9 @@ from Player import *
 from BlockData import BlockData
 from Level import *
 from GameWindow import *
+from DeathScreen import *
+from StartScreen import *
+from WinScreen import *
 
 grid = pygame.image.load("data/screens/whitegrid.bmp")
 grid.set_colorkey((163,73,164))
@@ -22,6 +25,18 @@ level.DrawFrame(gameWindow)
 done = False
 LoopCount = 0
 t0 = time.time()
+
+strtscrn = StartScreen(gameWindow)
+
+while gameWindow.StartScreen:
+    #pygame.event.wait()
+    #print(strtscrn.logoname)
+    for event in pygame.event.get(): 
+        if event.type == pygame.KEYDOWN:                                                                                 
+            if event.key == pygame.K_SPACE:
+                gameWindow.StartScreen = False
+                del strtscrn
+
 
 while done==False:
 
@@ -43,14 +58,17 @@ while done==False:
                 print("Win!")
                 done = True
     elif level.Lost and not level.Paused:
-        print("LOST")
-        if done == False:
-            gameWindow.RestartLevel(int(gameWindow.Level.Name[-1]))
-            level = gameWindow.Level
-            level.DrawFrame(gameWindow)
-        else:
+        #if done == False:
+        
+        gameWindow.DeathScreen = True
+        if gameWindow.DeathScreen == True:
+            dthscrn = DeathScreen(gameWindow)
+        
+            #gameWindow.DeathScreen = True
+            
+        #else:
         #Losing screen here
-            done = True
+            #done = True
 
     if not (level.Lost or level.Cleared):
         if not level.Paused:
@@ -75,6 +93,13 @@ while done==False:
                        level.Paused = False
                    else:
                        level.Paused = True
+               elif event.key == pygame.K_SPACE and gameWindow.DeathScreen == True and not level.Paused:
+                   gameWindow.DeathScreen = False
+                   del dthscrn
+                   gameWindow.RestartLevel(int(gameWindow.Level.Name[-1]))
+                   level = gameWindow.Level
+                   level.DrawFrame(gameWindow)
+
 
 
     t = time.time()                                                #\

@@ -19,7 +19,7 @@ class GameWindow(object):
         
         self.Level = Level(self.Window, "bckg1.bmp", "Level 1")
 
-        self.StartScreen = False
+        self.StartScreen = True
         self.DeathScreen = False
         self.WinScreen = False
 
