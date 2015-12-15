@@ -42,9 +42,6 @@
     <Compile Include="Player.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Randomiser.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Block.py">
       <SubType>Code</SubType>
     </Compile>

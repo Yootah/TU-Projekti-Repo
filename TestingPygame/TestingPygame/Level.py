@@ -73,7 +73,6 @@ class Level(object):
         
         if Walls:
             RECTS = list((b.rect.x, b.rect.y) for b in Walls)
-            #print("walls:",RECTS)
             self.PlayerGroup.sprite.rect.x = Leftmost - 40
             self.PlayerGroup.sprite.Surface = False
             self.PlayerGroup.sprite.Stuck = True
@@ -92,7 +91,6 @@ class Level(object):
             and NotWalls[0].rect.x != Leftmost): 
 
             IDS = list((b.rect.x, b.rect.y) for b in NotWalls)
-            #print("notwalls:",IDS)
             Limit, Deaded = CollisionCheck.BuildFloor(NotWalls, self.PlayerGroup.sprite)
             self.PlayerGroup.sprite.rect.y = Limit-40 if self.PlayerGroup.sprite.Gravi > 0 else Limit
             self.PlayerGroup.sprite.Surface = True

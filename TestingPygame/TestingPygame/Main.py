@@ -31,8 +31,6 @@ strtscrn = StartScreen(gameWindow)
 while done==False:
 
     if gameWindow.StartScreen:
-    #pygame.event.wait()
-    #print(strtscrn.logoname)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True 
@@ -52,40 +50,22 @@ while done==False:
     elif level.EndReached and not (level.Lost or level.Paused or gameWindow.StartScreen or gameWindow.WinScreen):
         if level.Cleared:
             if level.Name[-1] != "4":
-                print("CLEARED!")
-                #done = True
                 gameWindow.NextLevel(int(gameWindow.Level.Name[-1]))
                 level = gameWindow.Level
                 level.DrawFrame(gameWindow)
-                # here goes the level transition or winning screen
             else:
                 wnscrn = WinScreen(gameWindow)
-                print("Win!")
                 gameWindow.WinScreen = True
-                #done = True
     elif level.Lost and not level.Paused and not gameWindow.StartScreen:
-        #if done == False:
-        
         gameWindow.DeathScreen = True
         if gameWindow.DeathScreen == True:
             dthscrn = DeathScreen(gameWindow)
-        
-            #gameWindow.DeathScreen = True
-            
-        #else:
-        #Losing screen here
-            #done = True
-
     if not (level.Lost or level.Cleared or gameWindow.StartScreen):
         if not level.Paused:
             level.ShiftFrame()
             if level.LevelShift + level.Width <= 1000 and not level.EndReached:
                 level.EndReached = True
             level.DrawFrame(gameWindow)
-        #else:
-                
-
-
 
     for event in pygame.event.get():                                                                                                    #\
             if event.type == pygame.QUIT:                                                                                               # \
@@ -93,7 +73,7 @@ while done==False:
             if event.type == pygame.KEYDOWN:                                                                                            #    Looking out for key spamming, ragequitting etc (aka events).
                if event.key == pygame.K_SPACE and level.PlayerGroup.sprite.Surface and not (level.Paused or gameWindow.WinScreen):      # /
                     level.PlayerGroup.sprite.FlipGravi()                                                                                #/
-               elif event.key == pygame.K_p:
+               elif event.key == pygame.K_p and not (level.Lost or gameWindow.StartScreen):
                    if level.Paused:
                        level.Paused = False
                    else:
