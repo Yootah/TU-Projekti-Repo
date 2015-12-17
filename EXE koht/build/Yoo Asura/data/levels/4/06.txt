@@ -1,0 +1,12 @@
+1P    P              P
+2P    P            PPP
+3P    Pbbbb       
+4PbbbbP         PPP
+5P          
+6           PPPP
+7P          
+8PBBBBP         PPP
+9P    Pbbbb           
+1P    P            PPP
+1P    P              P
+1P    P              t
