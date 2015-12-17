@@ -1,0 +1,12 @@
+1
+2        mmmm    
+3            mmmmm
+4mmmmN              mm
+5    N   N     
+6    N   N  MMMMM
+7        N       MMMM
+8    MMMMN
+9
+10
+11
+12
