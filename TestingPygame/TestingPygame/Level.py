@@ -8,12 +8,11 @@ from os.path import join
 from os import getcwd
 
 class Level(object):
-    """..."""
+    "A level. Contains a player and lots blocks. Gets deleted/re-created when we want to restart or move on to the next level. "
    
     def __init__(self, window, imageName = "bckg1.bmp", name = "Level 1"):
-        """
-        nop. 
-        """
+        "Level constructor. "
+
         # Player belongs to the entire level
         self.PlayerGroup = pygame.sprite.GroupSingle()
 
@@ -32,6 +31,7 @@ class Level(object):
         self.Cleared = False
         self.Lost = False
         self.Paused = False
+        self.Deaded = False
                 
         for n in range(1,7):
             s = Stage(str(n).rjust(2, "0"), self)
@@ -39,78 +39,51 @@ class Level(object):
 
 
     def DrawFrame(self, screen):
+        "Draws things after moving. "
         screen.Window.blit(self.Bckgr, (self.CurrentX,0))
         self.AllBlocksGroup.draw(screen.Window)
         self.PlayerGroup.draw(screen.Window)
-
         
 
     def ShiftFrame(self): 
+        "What the method name says. "
 
-        # Shifting all blocks on screen
-        self.PlayerGroup.sprite.Animate()
+        self.MoveThings()
+        
+        collisions = pygame.sprite.spritecollide(self.PlayerGroup.sprite, self.AllBlocksGroup, False)
+        Leftmost, Walls, NotWalls, self.Deaded = CollisionCheck.BuildWall(collisions, self.PlayerGroup.sprite)
+        CollisionCheck.CheckWalls(self, Walls, Leftmost)
+        CollisionCheck.CheckFloors(self, NotWalls, Leftmost)
+        
+        if self.Deaded:                         self.Lost = True
+        if not self.Lost:                       self.Lost = CollisionCheck.LostTheGame(self.PlayerGroup.sprite)
+        if not (self.Cleared or self.Lost):     self.Cleared = CollisionCheck.LevelCleared(self.PlayerGroup.sprite)
+
+
+    def MoveThings(self):
+        "Change the positions of player and blocks. "
+
+        self.PlayerGroup.sprite.Animate()              # play the running animation
+
+        gravi = self.PlayerGroup.sprite.Gravi
+        player_x = self.PlayerGroup.sprite.rect.x
+        player_stuck = self.PlayerGroup.sprite.Stuck
+        player_onSurface = self.PlayerGroup.sprite.Surface
+        
+        if not player_onSurface:
+            self.PlayerGroup.sprite.rect.y += gravi     # player falls if nothing supports him
 
         if not self.EndReached:
-
-            for block in self.AllBlocksGroup:             
+            for block in self.AllBlocksGroup:            # move every block backward 
                 block.rect.x -= 10                   
-                if block.rect.x + 40 <= 0:
+                if block.rect.x + 40 <= 0:               # delete blocks that run out of borders
                     block.kill()
+            self.LevelShift -= 10                        # memorize the amount of movement
 
-            self.LevelShift -= 10
-
-            if self.PlayerGroup.sprite.rect.x < 120 and not self.PlayerGroup.sprite.Stuck:
+            if player_x < 120 and not player_stuck:         # if player got stuck but got out, start slowly moving him forward until start position is restored
                 self.PlayerGroup.sprite.rect.x += 2
-
-        elif self.EndReached:
-            self.PlayerGroup.sprite.rect.x += 10
-
-        if not self.PlayerGroup.sprite.Surface:
-            self.PlayerGroup.sprite.rect.y += self.PlayerGroup.sprite.Gravi        # If we have nothing under our feet, move the Player 10 px up/down
-        
-        collisions = pygame.sprite.spritecollide(self.PlayerGroup.sprite, self.AllBlocksGroup, False)      # A list of Blocks that collide with the Player
-        Leftmost, Walls, NotWalls, Deaded = CollisionCheck.BuildWall(collisions, self.PlayerGroup.sprite)
-        
-        if Walls:
-            RECTS = list((b.rect.x, b.rect.y) for b in Walls)
-            self.PlayerGroup.sprite.rect.x = Leftmost - 40
-            self.PlayerGroup.sprite.Surface = False
-            self.PlayerGroup.sprite.Stuck = True
-        else: 
-            self.PlayerGroup.sprite.Stuck = False
-
-        NotWalls = list(filter(   (lambda a: a.rect.y+40 >= self.PlayerGroup.sprite.rect.y+40 
-                                       if (     self.PlayerGroup.sprite.Gravi > 0    )
-                                       else a.rect.y <= self.PlayerGroup.sprite.rect.y
-                                       ), 
-                                    NotWalls
-                                    )
-                            )
-        if (NotWalls 
-            and not self.PlayerGroup.sprite.Surface 
-            and NotWalls[0].rect.x != Leftmost): 
-
-            IDS = list((b.rect.x, b.rect.y) for b in NotWalls)
-            Limit, Deaded = CollisionCheck.BuildFloor(NotWalls, self.PlayerGroup.sprite)
-            self.PlayerGroup.sprite.rect.y = Limit-40 if self.PlayerGroup.sprite.Gravi > 0 else Limit
-            self.PlayerGroup.sprite.Surface = True
-
-        elif (not NotWalls
-              and self.PlayerGroup.sprite.Surface):
-            self.PlayerGroup.sprite.rect.y += 1 if self.PlayerGroup.sprite.Gravi > 0 else -1
-            collisions2 = pygame.sprite.spritecollide(self.PlayerGroup.sprite, self.AllBlocksGroup, False)
-            if not collisions2: 
-                self.PlayerGroup.sprite.Surface = False
-            self.PlayerGroup.sprite.rect.y -= 1 if self.PlayerGroup.sprite.Gravi > 0 else -1
-        
-        if Deaded: self.Lost = True
-
-        if not self.Lost:
-            self.Lost = CollisionCheck.LostTheGame(self.PlayerGroup.sprite)
-        if not self.Cleared:
-            self.Cleared = CollisionCheck.LevelCleared(self.PlayerGroup.sprite)
-
-        
+        else:
+            self.PlayerGroup.sprite.rect.x += 10            # if the level has nowhere else to move, freeze it and move the player forward instead
 
     
 
